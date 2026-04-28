@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zoobia Gillani · AI Engineer</title>
+  <!-- Font Awesome 6 (free) for icons & professional feel -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* ----- global reset & fonts ----- */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f8fafc;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #0f172a;
+      scroll-behavior: smooth;
+      transition: background-color 0.3s, color 0.2s;
+    }
+
+    /* container */
+    .container {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 0 2rem;
+    }
+
+    /* ----- light/dark toggle (professional) ----- */
+    .theme-toggle {
+      position: fixed;
+      top: 1.5rem;
+      right: 2rem;
+      z-index: 100;
+      background: white;
+      padding: 0.5rem 1rem;
+      border-radius: 40px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02), 0 2px 6px rgba(0,20,50,0.05);
+      display: flex;
+      gap: 0.75rem;
+      border: 1px solid #e2e8f0;
+      backdrop-filter: blur(4px);
+    }
+    .theme-toggle label {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: #334155;
+      transition: 0.2s;
+    }
+    .theme-toggle input[type="radio"] {
+      accent-color: #2563eb;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+    }
+    body.dark-mode {
+      background: #0b1120;
+      color: #e2e8f0;
+    }
+    body.dark-mode .theme-toggle {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    body.dark-mode .theme-toggle label {
+      color: #cbd5e1;
+    }
+    body.dark-mode .card,
+    body.dark-mode .chat-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+
+    /* ----- hero section with avatar icon & github ----- */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 4rem;
+      gap: 2rem;
+    }
+    .hero-text h1 {
+      font-size: 3.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      background: linear-gradient(145deg, #1e293b, #2563eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    body.dark-mode .hero-text h1 {
+      background: linear-gradient(145deg, #e2e8f0, #60a5fa);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-sub {
+      font-size: 1.4rem;
+      font-weight: 400;
+      color: #475569;
+      margin: 0.75rem 0 1.5rem;
+    }
+    body.dark-mode .hero-sub {
+      color: #94a3b8;
+    }
+    .hero-avatar {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .avatar-icon {
+      font-size: 6rem;
+      color: #2563eb;
+      filter: drop-shadow(0 10px 12px rgba(37,99,235,0.2));
+      transition: transform 0.2s;
+    }
+    .avatar-icon:hover {
+      transform: scale(1.02);
+    }
+    .github-badge {
+      background: #0f172a;
+      color: white;
+      padding: 0.6rem 1.5rem;
+      border-radius: 60px;
+      font-size: 1.2rem;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      border: 1px solid #334155;
+      transition: all 0.2s;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    body.dark-mode .github-badge {
+      background: #ffffff0d;
+      border-color: #475569;
+      color: #f1f5f9;
+    }
+    .github-badge i {
+      font-size: 1.6rem;
+    }
+    .github-badge:hover {
+      background: #1e293b;
+      border-color: #2563eb;
+      transform: translateY(-3px);
+    }
+    .btn-primary, .btn-secondary {
+      display: inline-block;
+      padding: 0.8rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: 0.2s;
+      border: 1px solid transparent;
+    }
+    .btn-primary {
+      background: #2563eb;
+      color: white;
+      box-shadow: 0 4px 10px #2563eb30;
+    }
+    .btn-primary:hover {
+      background: #1d4ed8;
+      transform: translateY(-3px);
+    }
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid #2563eb;
+      color: #2563eb;
+    }
+    .btn-secondary:hover {
+      background: #eef2ff;
+    }
+    body.dark-mode .btn-secondary {
+      border-color: #60a5fa;
+      color: #60a5fa;
+    }
+    body.dark-mode .btn-secondary:hover {
+      background: #1e293b;
+    }
+
+    /* ----- cards / sections ----- */
+    section {
+      margin: 3.5rem 0;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-bottom: 3px solid #e2e8f0;
+      padding-bottom: 0.5rem;
+    }
+    body.dark-mode h2 {
+      border-bottom-color: #334155;
+    }
+    h2 i {
+      color: #2563eb;
+      font-size: 1.8rem;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+    .skills-grid div {
+      background: white;
+      padding: 1.5rem 1rem;
+      border-radius: 24px;
+      text-align: center;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.02);
+      border: 1px solid #eef2f6;
+      font-weight: 500;
+      transition: 0.15s;
+    }
+    body.dark-mode .skills-grid div {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .skills-grid strong {
+      color: #2563eb;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 28px;
+      padding: 2rem;
+      margin-bottom: 1.8rem;
+      border: 1px solid #eef2f6;
+      box-shadow: 0 8px 20px -8px rgba(0,34,64,0.08);
+      transition: 0.2s;
+    }
+    body.dark-mode .project-card {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .project-card h3 {
+      font-size: 1.6rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .project-card h3 i {
+      color: #2563eb;
+    }
+    .project-card ul {
+      padding-left: 1.8rem;
+    }
+    .project-card li {
+      margin: 0.7rem 0;
+    }
+
+    /* chatbot section — YOUR PERSONAL AI ASSISTANT */
+    .chat-card {
+      background: white;
+      border-radius: 32px;
+      border: 1px solid #e2e8f0;
+      padding: 2rem;
+      margin: 2.5rem 0;
+      box-shadow: 0 20px 30px -10px rgba(0,0,0,0.1);
+    }
+    body.dark-mode .chat-card {
+      background: #1e293b;
+    }
+    .chat-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 1.5rem;
+    }
+    .chat-header i {
+      font-size: 2.5rem;
+      color: #2563eb;
+    }
+    .chat-header span {
+      font-weight: 600;
+      font-size: 1.8rem;
+    }
+    .chat-window {
+      background: #f1f5f9;
+      border-radius: 32px;
+      padding: 1.5rem;
+      min-height: 160px;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    body.dark-mode .chat-window {
+      background: #0f172a;
+    }
+    .bot-message {
+      background: #2563eb;
+      color: white;
+      padding: 1rem 1.6rem;
+      border-radius: 28px 28px 28px 8px;
+      max-width: 80%;
+      align-self: flex-start;
+      font-weight: 400;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+    .user-message {
+      background: white;
+      color: #0f172a;
+      padding: 1rem 1.6rem;
+      border-radius: 28px 28px 8px 28px;
+      max-width: 80%;
+      align-self: flex-end;
+      border: 1px solid #cbd5e1;
+    }
+    body.dark-mode .user-message {
+      background: #334155;
+      color: #f1f5f9;
+      border-color: #475569;
+    }
+    .chat-input-area {
+      display: flex;
+      margin-top: 1.5rem;
+      gap: 8px;
+    }
+    .chat-input-area input {
+      flex: 1;
+      padding: 1rem 1.5rem;
+      border-radius: 60px;
+      border: 1px solid #cbd5e1;
+      background: white;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.15s;
+    }
+    body.dark-mode .chat-input-area input {
+      background: #0f172a;
+      border-color: #475569;
+      color: #f1f5f9;
+    }
+    .chat-input-area input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 0 0 3px #2563eb20;
+    }
+    .chat-input-area button {
+      background: #2563eb;
+      border: none;
+      color: white;
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      cursor: pointer;
+      transition: 0.15s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .chat-input-area button:hover {
+      background: #1d4ed8;
+      transform: scale(1.04);
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 28px;
+      border: 1px solid #eef2f6;
+    }
+    body.dark-mode .contact-form {
+      background: #1e293b;
+      border-color: #334155;
+    }
+    .contact-form input, .contact-form textarea {
+      width: 100%;
+      padding: 1rem 1.2rem;
+      margin: 0.7rem 0;
+      border-radius: 40px;
+      border: 1px solid #e2e8f0;
+      background: #f9fbfd;
+      font-family: inherit;
+    }
+    body.dark-mode .contact-form input,
+    body.dark-mode .contact-form textarea {
+      background: #0f172a;
+      border-color: #334155;
+      color: #f1f5f9;
+    }
+    .contact-form button {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 60px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-top: 0.5rem;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 5rem;
+      color: #64748b;
+      border-top: 1px solid #e2e8f0;
+      padding-top: 2rem;
+    }
+    body.dark-mode footer {
+      border-color: #334155;
+    }
+  </style>
+</head>
+<body>
+  <!-- theme switcher -->
+  <div class="theme-toggle">
+    <label><input type="radio" name="theme" checked onclick="setTheme('light')"> <i class="fa-regular fa-sun"></i> Light</label>
+    <label><input type="radio" name="theme" onclick="setTheme('dark')"> <i class="fa-regular fa-moon"></i> Dark</label>
+  </div>
+
+  <div class="container">
+
+    <!-- hero with icon & GitHub link (added) -->
+    <header class="hero">
+      <div class="hero-text">
+        <h1>Zoobia Gillani</h1>
+        <p class="hero-sub"><i class="fa-regular fa-star" style="margin-right: 8px;"></i> AI Engineer · ML · NLP · LLM Integration</p>
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+          <a href="Zoobia_Gillani_CV.docx" download class="btn-primary"><i class="fa-regular fa-file-pdf" style="margin-right: 8px;"></i> Download CV</a>
+          <a href="https://github.com/Zoobia-Gillani" target="_blank" class="btn-secondary"><i class="fa-brands fa-github" style="font-size: 1.3rem; margin-right: 6px;"></i> GitHub</a>
+        </div>
+      </div>
+      <div class="hero-avatar">
+        <!-- deployed icon: professional robot / engineer + github badge again (icon) -->
+        <div class="avatar-icon">
+          <i class="fa-solid fa-robot"></i>
+        </div>
+        <a href="https://github.com/Zoobia-Gillani" target="_blank" class="github-badge">
+          <i class="fa-brands fa-github"></i> /Zoobia-Gillani
+        </a>
+      </div>
+    </header>
+
+    <!-- ========== PROFESSIONAL SUMMARY ========== -->
+    <section>
+      <h2><i class="fa-regular fa-note-sticky"></i> 1. Professional Summary</h2>
+      <p style="font-size: 1.2rem; max-width: 900px;">AI Engineer with strong expertise in Machine Learning, Deep Learning fundamentals, NLP, and Computer Vision. Built intelligent systems including a Sentiment Analysis model achieving <strong>87% validation accuracy</strong> and an LLM-based AI assistant using DeepSeek and OpenRouter API. Background in Chemical Engineering enhances analytical thinking, optimization, and system modeling capabilities.</p>
+    </section>
+
+    <!-- ========== SKILLS ========== -->
+    <section>
+      <h2><i class="fa-regular fa-code"></i> 2. Technical Skills</h2>
+      <div class="skills-grid">
+        <div><strong>Programming</strong><br>Python (Advanced)</div>
+        <div><strong>ML Algorithms</strong><br>Logistic Regression, SVM, Naive Bayes</div>
+        <div><strong>Deep Learning</strong><br>Neural Networks Fundamentals</div>
+        <div><strong>NLP</strong><br>TF-IDF, Sentiment Analysis, Chatbots</div>
+        <div><strong>Computer Vision</strong><br>Object Detection, Labeling</div>
+        <div><strong>Libraries</strong><br>NumPy, Pandas, Scikit-learn</div>
+        <div><strong>Tools</strong><br>Git, GitHub, Jupyter, VS Code</div>
+        <div><strong>AI Integration</strong><br>DeepSeek, OpenRouter API</div>
+      </div>
+    </section>
+
+    <!-- ========== PROJECTS ========== -->
+    <section>
+      <h2><i class="fa-regular fa-folder-open"></i> 3. Project Experience</h2>
+
+      <div class="project-card">
+        <h3><i class="fa-regular fa-chart-line"></i> Advanced Sentiment Analysis System</h3>
+        <ul>
+          <li>Performed data cleaning and preprocessing on structured dataset.</li>
+          <li>Applied TF-IDF vectorization and trained multiple ML models.</li>
+          <li>Compared algorithms using evaluation metrics.</li>
+          <li><strong>Achieved 87% validation accuracy after hyperparameter tuning.</strong></li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <h3><i class="fa-regular fa-message"></i> Personal AI Assistant (LLM-Based Chatbot)</h3>
+        <ul>
+          <li>Integrated DeepSeek model via OpenRouter API.</li>
+          <li>Designed optimized prompts for contextual accuracy.</li>
+          <li>Improved response efficiency through structured API handling.</li>
+        </ul>
+      </div>
+
+      <div class="project-card">
+        <h3><i class="fa-regular fa-eye"></i> Object Detection & Dataset Preparation</h3>
+        <ul>
+          <li>Worked on bounding box annotation and dataset labeling.</li>
+          <li>Prepared structured training datasets for CV pipelines.</li>
+          <li>Improved dataset consistency and quality control.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ========== EDUCATION & TRAINING ========== -->
+    <section>
+      <h2><i class="fa-regular fa-graduation-cap"></i> 4. Education & Training</h2>
+      <p style="margin-bottom: 0.8rem;"><strong>BS Chemical Engineering</strong><br>COMSATS University Islamabad (CUI), Lahore Campus<br><span style="color: #475569;">Relevant Coursework: Mathematics, Statistics, Process Optimization, System Modeling</span></p>
+      <p><strong>NAVTTC – Artificial Intelligence Program</strong><br>Machine Learning | Deep Learning | NLP | Computer Vision | AI Deployment Basics</p>
+    </section>
+
+    <!-- ========== CORE COMPETENCIES ========== -->
+    <section>
+      <h2><i class="fa-regular fa-lightbulb"></i> 5. Core Competencies</h2>
+      <ul style="display: grid; grid-template-columns: repeat(2,1fr); gap: 0.8rem; font-size: 1.1rem; list-style: none;">
+        <li><i class="fa-regular fa-check-circle" style="color:#2563eb;"></i> Analytical Thinking</li>
+        <li><i class="fa-regular fa-check-circle" style="color:#2563eb;"></i> Problem Solving</li>
+        <li><i class="fa-regular fa-check-circle" style="color:#2563eb;"></i> Fast Learner</li>
+        <li><i class="fa-regular fa-check-circle" style="color:#2563eb;"></i> Deadline-Oriented</li>
+        <li><i class="fa-regular fa-check-circle" style="color:#2563eb;"></i> Continuous AI Research</li>
+      </ul>
+    </section>
+
+    <!-- ========== PERSONAL CHATBOT (AI ASSISTANT) ========== -->
+    <section>
+      <div class="chat-card" id="ai-chat">
+        <div class="chat-header">
+          <i class="fa-solid fa-head-side-brain"></i>
+          <span>Zoobia’s AI twin</span>
+        </div>
+        <div class="chat-window" id="chatWindow">
+          <div class="bot-message">Hi! I'm Zoobia's AI portfolio assistant. Ask me about her skills, projects, or experience.</div>
+          <div class="user-message" style="display: none;" id="userMsgPlaceholder"></div>
+        </div>
+        <div class="chat-input-area">
+          <input type="text" id="chatInput" placeholder="Ask about Zoobia..." />
+          <button id="sendChatBtn"><i class="fa-regular fa-paper-plane"></i></button>
+        </div>
+        <p style="font-size: 0.85rem; margin-top: 1rem; color: #64748b;"><i class="fa-regular fa-circle-info"></i> This bot simulates answers based on her CV. (try: "skills", "projects", "sentiment analysis")</p>
+      </div>
+    </section>
+
+    <!-- ========== CONTACT ========== -->
+    <section class="contact">
+      <h2><i class="fa-regular fa-address-card"></i> 6. Contact</h2>
+      <div class="contact-form">
+        <form id="contactForm">
+          <input type="text" placeholder="Your Name" required>
+          <input type="email" placeholder="Your Email" required>
+          <textarea placeholder="Your Message" rows="3"></textarea>
+          <button type="submit"><i class="fa-regular fa-paper-plane" style="margin-right: 8px;"></i>Send Message</button>
+        </form>
+      </div>
+    </section>
+
+    <footer>
+      <i class="fa-regular fa-copyright"></i> 2025 Zoobia Gillani — built with <i class="fa-solid fa-heart" style="color:#2563eb;"></i> and AI
+    </footer>
+  </div>
+
+  <script>
+    // dark/light mode
+    function setTheme(mode) {
+      if (mode === 'dark') document.body.classList.add('dark-mode');
+      else document.body.classList.remove('dark-mode');
+    }
+
+    // simple CV‑aware chatbot (rule‑based, portfolio personality)
+    const cvData = {
+      summary: "AI Engineer with ML, NLP, Computer Vision, 87% sentiment accuracy, DeepSeek/OpenRouter API, Chem Eng background.",
+      skills: ["Python", "Machine Learning", "NLP", "Deep Learning", "Computer Vision", "Pandas", "Scikit-learn", "Git", "OpenRouter", "DeepSeek"],
+      projects: [
+        "Sentiment Analysis (87% accuracy) – TF‑IDF + hyperparameter tuning.",
+        "Personal AI Assistant – DeepSeek via OpenRouter, prompt engineering.",
+        "Object detection – dataset annotation & preparation for CV."
+      ],
+      education: "BS Chemical Engineering, COMSATS. NAVTTC AI program (ML, DL, NLP, CV).",
+      competencies: ["Analytical Thinking", "Problem Solving", "Fast Learner", "Deadline‑Oriented", "Continuous AI Research"]
+    };
+
+    function getBotReply(query) {
+      const q = query.toLowerCase();
+      if (q.includes('skill') || q.includes('technologies') || q.includes('know')) 
+        return "Zoobia's core skills: " + cvData.skills.join(', ') + ".";
+      if (q.includes('project') || q.includes('build')) 
+        return "Here are her key projects:\n• " + cvData.projects.join('\n• ');
+      if (q.includes('accuracy') || q.includes('sentiment')) 
+        return "The sentiment analysis model reached 87% validation accuracy after tuning.";
+      if (q.includes('education') || q.includes('study') || q.includes('degree')) 
+        return cvData.education;
+      if (q.includes('competence') || q.includes('strength')) 
+        return "Core competencies: " + cvData.competencies.join(', ') + ".";
+      if (q.includes('contact') || q.includes('email') || q.includes('reach')) 
+        return "You can use the contact form on this page, or connect via GitHub. (see the icon!)";
+      if (q.includes('cv') || q.includes('resume')) 
+        return "You can download her CV using the 'Download CV' button at the top.";
+      return "I'm Zoobia's virtual AI. Ask me about her skills, projects, education, or experience!";
+    }
+
+    const chatWindow = document.getElementById('chatWindow');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendChatBtn');
+
+    function addMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add(sender === 'bot' ? 'bot-message' : 'user-message');
+      msgDiv.innerText = text;
+      chatWindow.appendChild(msgDiv);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', () => {
+      const question = chatInput.value.trim();
+      if (!question) return;
+      addMessage(question, 'user');
+      chatInput.value = '';
+      // Simulate typing delay
+      setTimeout(() => {
+        const answer = getBotReply(question);
+        addMessage(answer, 'bot');
+      }, 500);
+    });
+
+    chatInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') sendBtn.click();
+    });
+
+    // initial bot greeting already present in html, keep it.
+    // contact form dummy (prevent page reload)
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Thanks for your message (demo). In a real portfolio this would send an email.');
+      this.reset();
+    });
+  </script>
+</body>
+</html>
